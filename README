@@ -1,0 +1,64 @@
+nodejschat
+
+Copyright 2016 Michael Redman
+IN GOD WE TRVST.
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+Install nodejs:
+
+#Debian
+apt-get install nodejs npm
+
+#CentOS
+yum install nodejs npm
+
+
+Install node dependencies:
+
+#in this dir (same dir as package.json)
+npm install
+
+
+Configuration:
+
+Edit html/site_conf.js and ws_server/site_conf.js to match your settings.
+
+
+Launching:
+
+Run websocket server (uses settings in ws_server/site_conf.js):
+
+nodejs cluster.js ws_server/server.js
+
+Optionally, run HTTP server for HTML+javascript client (uses settings in html/site_conf.js):
+
+nodejs cluster.js html/server.js
+
+
+User sessions:
+
+It is the embedding application's responsibility to create a valid session key in the database table "sessions". Else the websocket server will reject connection.
+
+Example SQL: insert into sessions values('1','Michael Redman');
+
+Use SSL and use session keys that are cryptographically hard to guess, otherwise you will have no security whatsoever.
+
+
+Connecting:
+
+Example connect with command line test client (ws server on port 56412)
+
+nodejs test_client.js 1 wss://compute-1.michael-redman.name:56412/ 2 10
+
+Note ":56412/" not ":56412". Else you will not connect.
+
+This command says make 1 socket connection to the server at the specified URL and port, using the session key value "2", and each client socket (in this case one) should "say something" on the average once every 10 seconds.
+
+Example URL for HTML client in browser:
+
+https://compute-1.michael-redman.name:56411/chat?session_key=1
+
+
+IN GOD WE TRVST.

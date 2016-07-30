@@ -1,0 +1,14 @@
+{	"name": "nodejschat",
+	"version": "0.0.0",
+	"description": "chat",
+	"dependencies": {
+		"express": "latest",
+		"http": "latest",
+		"https": "latest",
+		"js-string-escape": "latest",
+		"morgan": "latest",
+		"pg": "latest",
+		"recluster": "latest",
+		"ws": "latest"
+		},
+	"author": "Michael Redman" }
