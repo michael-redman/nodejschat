@@ -8,13 +8,15 @@ This work is licensed under the Creative Commons Attribution-NonCommercial-Share
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 
-Install nodejs:
+Install Linux archive dependencies:
 
 #Debian
 apt-get install nodejs npm
 
 #CentOS
 yum install nodejs npm
+
+On whatever host will be your database server, also apt-get or yum install postgresql.
 
 
 Install node dependencies:
@@ -25,7 +27,7 @@ npm install
 
 Configuration:
 
-Create a database and import the schema with "psql yourdatabasename < schema.psql"
+Create a database and import the schema with "psql yourdatabasename < schema.psql". See the postgresql documentation for creating database users and databases.
 
 Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings.
 
