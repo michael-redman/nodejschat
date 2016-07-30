@@ -25,7 +25,7 @@ Configuration:
 
 Create a database and import the schema with "psql yourdatabasename < schema.psql"
 
-Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client,  to match your settings.
+Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings.
 
 
 Launching:
@@ -60,7 +60,7 @@ This command says make 1 socket connection to the server at the specified URL an
 
 Example URL for HTML client in browser:
 
-https://compute-1.michael-redman.name:56411/chat?session_key=1
+https://yourhost.com:56411/chat?session_key=1
 
 
 IN GOD WE TRVST.
