@@ -52,7 +52,7 @@ Connecting:
 
 Example connect with command line test client (ws server on port 56412)
 
-nodejs test_client.js 1 wss://compute-1.michael-redman.name:56412/ 2 10
+nodejs test_client.js 1 wss://yourhost.com:56412/ 2 10
 
 Note ":56412/" not ":56412". Else you will not connect.
 
