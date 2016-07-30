@@ -23,7 +23,9 @@ npm install
 
 Configuration:
 
-Edit html/site_conf.js and ws_server/site_conf.js to match your settings.
+Create a database and import the schema with "psql yourdatabasename < schema.psql"
+
+Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client,  to match your settings.
 
 
 Launching:
