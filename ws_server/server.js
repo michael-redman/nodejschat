@@ -93,7 +93,7 @@ module.exports = {
 									{	console.error(new Date().toISOString()+' '+err);
 										ws.close(); } });
 							}})(users[sockets.indexOf(ws)]));
-						db.query("select * from chat_log",null,function(err,result){
+						db.query("select * from chat_log order by time",null,function(err,result){
 							if	(err) {	console.error(new Date.toISOString() + ' ' + error); }
 							for	(var i=0; i<result.rows.length; i++)
 								if (ws.readyState==ws.OPEN) ws.send(JSON.stringify({

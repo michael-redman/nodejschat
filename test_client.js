@@ -15,7 +15,9 @@ function talk(i,ws){ return function(){
 	setInterval(
 		function(){
 			if	(!(Math.floor(Math.random()*talk_interval)))
-				ws.send(JSON.stringify({message: Math.random()})); }
+				{	message=Math.random();
+					console.log(message);
+					ws.send(JSON.stringify({message: message})); }}
 		, 1000); }}
 
 for	(var i=0;i<n_connections;i++)
@@ -34,7 +36,7 @@ for	(var i=0;i<n_connections;i++)
 				//console.log(new Date().toISOString() + ' binary data received');
 			//	else console.log(new Date().toISOString() + ' ' + data); });
 			json=JSON.parse(data);
-			console.log(new Date().toISOString() + ' ' + json.user + ': '+json.message); });
+			console.error(new Date().toISOString() + ' ' + json.user + ': '+json.message); });
 		sockets[i]=ws; }
 
 //IN GOD WE TRVST.

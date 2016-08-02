@@ -7,8 +7,6 @@ This work is licensed under the Creative Commons Attribution-NonCommercial-Share
 
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
-Commercial licensing inquiries email michael.redman.4@gmail.com
-
 
 Install Linux archive dependencies:
 
@@ -18,7 +16,7 @@ apt-get install nodejs npm
 #CentOS
 yum install nodejs npm
 
-On whatever host will be your database server, also apt-get or yum install postgresql.
+On whatever host will be your database server, also "apt-get install postgresql" or "yum install postgresql-server".
 
 
 Install node dependencies:
@@ -34,15 +32,15 @@ Create a database and import the schema with "psql yourdatabasename < schema.psq
 Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings.
 
 
-Launching:
+Launching (on Debian the node.js executable name is "nodejs" instead of "node"):
 
 Run websocket server (uses settings in ws_server/site_conf.js):
 
-nodejs cluster.js ws_server/server.js
+node ws_server/server.js
 
 Optionally, run HTTP server for HTML+javascript client (uses settings in html/site_conf.js):
 
-nodejs cluster.js html/server.js
+node html/server.js
 
 
 User sessions:
@@ -58,7 +56,7 @@ Connecting:
 
 Example connect with command line test client (ws server on port 56412)
 
-nodejs test_client.js 1 wss://yourhost.com:56412/ 2 10
+node test_client.js 1 wss://yourhost.com:56412/ 2 10
 
 Note ":56412/" not ":56412". Else you will not connect.
 
@@ -67,6 +65,16 @@ This command says make 1 socket connection to the server at the specified URL an
 Example URL for HTML client in browser:
 
 https://yourhost.com:56411/chat?session_key=1
+
+
+Limitations:
+
+This application will not yet work with multiple processes and load balancing (either on the same server or across servers), because the logic to notify other instances when a message has arrived and needs to be distributed, has not yet been written. Clients will miss messages from users that are connected to a different process, even though the processes share the same database.
+
+
+Bugs:
+
+The system drops some messages.
 
 
 IN GOD WE TRVST.
