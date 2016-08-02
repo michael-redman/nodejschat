@@ -74,7 +74,7 @@ This application will not yet work with multiple processes and load balancing (e
 
 Bugs:
 
-The system drops some messages.
+When overloaded the server drops messages without logging errors. You can test whether a server is dropping inbound messages at a given load using the test client and the chat log in the database. The chat client prints the messages it sends to stdout one per line.
 
 
 IN GOD WE TRVST.
