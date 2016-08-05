@@ -72,9 +72,4 @@ Limitations:
 This application will not yet work with multiple processes and load balancing (either on the same server or across servers), because the logic to notify other instances when a message has arrived and needs to be distributed, has not yet been written. Clients will miss messages from users that are connected to a different process, even though the processes share the same database.
 
 
-Bugs:
-
-When overloaded the server drops messages without logging errors. You can test whether a server is dropping inbound messages at a given load using the test client and the chat log in the database. The chat client prints the messages it sends to stdout one per line.
-
-
 IN GOD WE TRVST.

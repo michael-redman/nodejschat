@@ -3,7 +3,11 @@ function escape_html(string){
 	div.appendChild(document.createTextNode(string));
 	return div.innerHTML; }
 var ws;
+var authenticated=0;
 function send_message(){
+	if	(!authenticated)
+		{	alert("Cannot send message yet because not yet authenticated.");
+			return; }
 	var text=input_text.value;
 	ws.send(JSON.stringify({
 		session_key: session_key,
@@ -26,6 +30,7 @@ window.onload = function(){
 		//if	(flags.binary)
 			//console.log(new Date().toISOString() + ' binary data received');
 		data=JSON.parse(event.data);
+		if (data.authenticated) authenticated=1;
 		if	(data.message)
 			{	messages.push(data);
 				var html = "";

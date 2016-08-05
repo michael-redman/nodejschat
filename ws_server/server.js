@@ -100,6 +100,8 @@ module.exports = {
 									time: result.rows[i].time,
 									user: result.rows[i].user,
 									message: result.rows[i].message })); });
+						if	(ws.readyState!=ws.CLOSING && ws.readyState!=ws.CLOSED)
+							ws.send(JSON.stringify({ authenticated: true }));
 						console.error(new Date().toISOString() + ' ' + users[sockets.indexOf(ws)]+' connected.');
 						}})(ws),
 					function(){

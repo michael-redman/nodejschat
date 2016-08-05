@@ -8,12 +8,13 @@ const url = process.argv[3];
 const session_key = process.argv[4];
 const talk_interval=process.argv[5];
 
-var sockets=[];
+var sockets=[],ready_states=[];
 
 function talk(i,ws){ return function(){
 	console.error(new Date().toISOString() + ' setting interval for connection ' + i);
 	setInterval(
 		function(){
+			if (ws.readyState!=ws.OPEN || ready_states[sockets.indexOf(ws)]==0) return;
 			if	(!(Math.floor(Math.random()*talk_interval)))
 				{	message=Math.random();
 					console.log(message);
@@ -21,22 +22,26 @@ function talk(i,ws){ return function(){
 		, 1000); }}
 
 for	(var i=0;i<n_connections;i++)
-	{	//var ws = new WebSocket(url+'?session_key='+session_key);
+	{	ready_states[i]=0;
+		//var ws = new WebSocket(url+'?session_key='+session_key);
 		var ws = new WebSocket(
 			url+'?session_key='+session_key,
 			null,
 			{ rejectUnauthorized: false });
 		ws.on('error',function(error){
-			console.error(new Date().toISOString() + ' ' + error); });
+			console.error(new Date().toISOString() + ' ERROR:' + error); });
 		ws.on('close',function(code,message){
 			console.error(new Date().toISOString() + ' socket closed: ' + code + ' ' + message); });
 		ws.on('open', talk(i,ws));
-		ws.on('message',function(data,flags){
+		ws.on('message',(function(ws){ return function(data,flags){
 			//if	(flags.binary)
 				//console.log(new Date().toISOString() + ' binary data received');
 			//	else console.log(new Date().toISOString() + ' ' + data); });
 			json=JSON.parse(data);
-			console.error(new Date().toISOString() + ' ' + json.user + ': '+json.message); });
+			if	(json.authenticated && json.authenticated==true)
+				{	ready_states[sockets.indexOf(ws)]=1;
+					console.error(new Date().toISOString() + ' Authenticated.'); }
+				else console.error(new Date().toISOString() + ' ' + json.user + ': '+json.message); }})(ws));
 		sockets[i]=ws; }
 
 //IN GOD WE TRVST.
