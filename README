@@ -36,11 +36,11 @@ Launching (on Debian the node.js executable name is "nodejs" instead of "node"):
 
 Run websocket server (uses settings in ws_server/site_conf.js):
 
-node ws_server/server.js
+node cluster.js ws_server/server.js
 
 Optionally, run HTTP server for HTML+javascript client (uses settings in html/site_conf.js):
 
-node html/server.js
+node cluster.js html/server.js
 
 
 User sessions:
@@ -65,11 +65,6 @@ This command says make 1 socket connection to the server at the specified URL an
 Example URL for HTML client in browser:
 
 https://yourhost.com:56411/chat?session_key=1
-
-
-Limitations:
-
-This application will not yet work with multiple processes and load balancing (either on the same server or across servers), because the logic to notify other instances when a message has arrived and needs to be distributed, has not yet been written. Clients will miss messages from users that are connected to a different process, even though the processes share the same database.
 
 
 IN GOD WE TRVST.

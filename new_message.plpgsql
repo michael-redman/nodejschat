@@ -1,0 +1,20 @@
+drop function if exists new_message(timestamp,text,text);
+create or replace function new_message
+	(	message_time timestamp with time zone,
+		message_user text,
+		message text)
+	returns void
+	as	$TEXT$
+		<<block0>>
+		declare message_id_l integer;
+		begin	insert into chat_log
+				values(	default,
+					message_time,
+					message_user,
+					message)
+				returning message_id into message_id_l;
+			perform pg_notify('nodejschat', message_id_l::text);
+		end;
+		$TEXT$
+	language plpgsql;
+--IN GOD WE TRVST.
