@@ -7,6 +7,8 @@ This work is licensed under the Creative Commons Attribution-NonCommercial-Share
 
 https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
+Commercial license inquiries email michael.redman.4@gmail.com
+
 
 Install Linux archive dependencies:
 
@@ -27,7 +29,7 @@ npm install
 
 Configuration:
 
-Create a database and import the schema with "psql yourdatabasename < schema.psql". See the postgresql documentation for creating database users and databases.
+Create a database and import the schema and stored procedure with "cat schema.psql new_message.plpgsql | psql yourdatabasename". See the postgresql documentation for creating database users and databases.
 
 Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings.
 
@@ -45,9 +47,9 @@ node cluster.js html/server.js
 
 User sessions:
 
-It is the embedding application's responsibility to create a valid session key in the database table "sessions". Else the websocket server will reject connection.
+It is the embedding application's responsibility to create a valid session key in the database table "sessions". Else the websocket server will reject connection. The fields are session_key (text), user_name (text), chat_room (integer).
 
-Example SQL: insert into sessions values('1','Michael Redman');
+Example SQL: insert into sessions values('1','Michael Redman',0);
 
 Use SSL and use session keys that are cryptographically hard to guess, otherwise you will have no security whatsoever.
 

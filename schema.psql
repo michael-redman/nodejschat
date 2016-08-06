@@ -1,5 +1,5 @@
 drop table if exists sessions;
-drop table if exists chat_log;
+drop table if exists log;
 drop sequence if exists message_id_sequence;
 create table sessions (
 	key text not null unique,
