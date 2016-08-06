@@ -1,14 +1,15 @@
-drop function if exists new_message(timestamp,text,text);
 create or replace function new_message
-	(	message_time timestamp with time zone,
+	(	room integer,
+		message_time timestamp with time zone,
 		message_user text,
 		message text)
 	returns void
 	as	$TEXT$
 		<<block0>>
 		declare message_id_l integer;
-		begin	insert into chat_log
+		begin	insert into log
 				values(	default,
+					room,
 					message_time,
 					message_user,
 					message)

@@ -1,12 +1,16 @@
 drop table if exists sessions;
 drop table if exists chat_log;
 drop sequence if exists message_id_sequence;
-create table sessions (key text not null unique, "user" text not null);
+create table sessions (
+	key text not null unique,
+	"user" text not null,
+	room integer not null);
 create sequence message_id_sequence;
-create table chat_log (
+create table log (
 	message_id integer
 		default nextval('message_id_sequence'::text)
 		not null unique,
+	room integer not null,
 	"time" timestamp not null,
 	"user" text not null,
 	message text not null);
