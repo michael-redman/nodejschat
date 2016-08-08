@@ -1,12 +1,11 @@
 const WebSocket = require('ws');
 
-if	(process.argv.length!=6)
+if	(process.argv.length!=5)
 	{	console.error('USE: nodejs client.js n_connections ws://some.host.com:port/path session_key talk_interval_in_seconds');
 		process.exit(1); }
-const n_connections=process.argv[2];
-const url = process.argv[3];
-const session_key = process.argv[4];
-const talk_interval=process.argv[5];
+const url = process.argv[2];
+const n_connections=process.argv[3];
+const talk_interval=process.argv[4];
 
 var sockets=[],ready_states=[];
 
@@ -25,7 +24,7 @@ for	(var i=0;i<n_connections;i++)
 	{	ready_states[i]=0;
 		//var ws = new WebSocket(url+'?session_key='+session_key);
 		var ws = new WebSocket(
-			url+'?session_key='+session_key,
+			url,
 			null,
 			{ rejectUnauthorized: false });
 		ws.on('error',function(error){

@@ -58,15 +58,24 @@ Connecting:
 
 Example connect with command line test client (ws server on port 56412)
 
-node test_client.js 1 wss://yourhost.com:56412/ 2 10
+node test_client.js wss://compute.michael-redman.name:56412/?session_key=6aa8b 100 500
 
-Note ":56412/" not ":56412". Else you will not connect.
-
-This command says make 1 socket connection to the server at the specified URL and port, using the session key value "2", and each client socket (in this case one) should "say something" on the average once every 10 seconds.
+This command says make 100 socket connections to the server at the specified URL and port, using the specified session key, and each client socket should "say something" on the average once every 500 seconds.
 
 Example URL for HTML client in browser:
 
-https://yourhost.com:56411/chat?session_key=1
+https://yourhost.com:56411/chat?session_key=1cf9a304
+
+
+Websocket API:
+
+Once the websocket has been established and the server has authenticated the client, it will send a message containing the JSON "{ authenticated: true }". The JSON message may contain other fields not yet specified. The server may discard any messages it receives prior to authenticating the client, so the client should wait for the message confirming authentication before sending anything.
+
+The chat messages are also in stringified JSON.
+
+Messasges from client to server must contain the field "message", which shall be a string with the message text.
+
+Messages from server to client have the fields "time", which is a timestamp of the format 2016-08-08T17:20:32.421Z, "user", which is the user name of who sent the messages, and "message" which is the message text.
 
 
 IN GOD WE TRVST.
