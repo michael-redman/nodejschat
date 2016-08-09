@@ -6,7 +6,7 @@ const js_string_escape = require('js-string-escape');
 const morgan = require('morgan');
 
 const site_conf = require('./site_conf.js');
-const setuidgid = require('../share/setuidgid.js');
+const setuidgid = require('../setuidgid.js');
 
 var _http;
 

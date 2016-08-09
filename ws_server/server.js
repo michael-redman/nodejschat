@@ -4,7 +4,7 @@ const pg = require('pg');
 const url = require('url');
 const WebSocketServer = require('ws').Server;
 
-const setuidgid=require('../share/setuidgid.js');
+const setuidgid=require('../setuidgid.js');
 const site_conf = require('./site_conf.js');
 
 var db, wss, n_sockets=0, sockets=[], users=[], rooms=[];

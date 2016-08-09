@@ -31,7 +31,7 @@ Configuration:
 
 Create a database and import the schema and stored procedure with "cat schema.psql new_message.plpgsql | psql yourdatabasename". See the postgresql documentation for creating database users and databases.
 
-Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings.
+Edit ws_server/site_conf.js, and optionally html/site_conf.js if you are going to use the example HTML client, to match your settings. If the "cert" value is there (not commented) then the servers will attempt to use SSL with the certificate, key, and (optionally) certificate chain settings you configure. Always use SSL for production.
 
 
 Launching (on Debian the node.js executable name is "nodejs" instead of "node"):
