@@ -4,6 +4,7 @@ function escape_html(string){
 	return div.innerHTML; }
 var ws;
 var authenticated=0;
+var log_html="", message_received=0;
 function send_message(){
 	if	(!authenticated)
 		{	alert("Cannot send message yet because not yet authenticated.");
@@ -19,6 +20,13 @@ window.onload = function(){
 	var sendButton = document.getElementById("send");
 	var content = document.getElementById("chat_log");
 	var name = document.getElementById("name");
+	setInterval(
+		function(){
+			if (!message_received) return;
+			content.innerHTML=log_html;
+			content.scrollTop=content.scrollHeight;
+			message_received=0; },
+		1000);
 	//ws = new WebSocket(chat_server,{headers: { Cookie: 'nodejschat_session_key='+session_key}});
 	ws = new WebSocket(chat_server+'?session_key='+session_key);
 	ws.onerror=function(error){
@@ -33,16 +41,15 @@ window.onload = function(){
 		if (data.authenticated) authenticated=1;
 		if	(data.message)
 			{	messages.push(data);
-				var html = "";
-				for	(var i=0; i<messages.length; i++)
-					html+=	escape_html(messages[i].time)
-						+ " <b>"
-						+ escape_html(messages[i].user)
-						+ ":</b> "
-						+ escape_html(messages[i].message)
-						+"<br/>";
-				content.innerHTML=html;
-				content.scrollTop=content.scrollHeight; }
+				var new_html=
+					escape_html(data.time)
+					+ " <b>"
+					+ escape_html(data.user)
+					+ ":</b> "
+					+ escape_html(data.message)
+					+"<br/>";
+				log_html+=new_html;
+				message_received=1; }
 			else	console.error("Error: ",data); };
 	sendButton.onclick=send_message; } 
 

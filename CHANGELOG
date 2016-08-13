@@ -2,3 +2,4 @@ New in v0.1.0:
 -Simplified test client command line interface
 -Documented client/server communication
 -Documented how to tell servers to use SSL or not
+-Fixed slow logic in example HTML client
